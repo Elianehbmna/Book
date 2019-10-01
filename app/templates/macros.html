@@ -1,0 +1,25 @@
+
+
+{% macro displayComment(comments) %}
+<ul>
+
+			{% if comments %}
+			{% for comment in comments %}
+			<div class="thumbnail text-center">
+					<div class="card">
+						<a><p>{{ comment.description }}</p></a>
+						<cite> posted by {{comment.user.username}}</cite>
+				</div>
+				</div>
+			{% endfor %}
+			{% else %}
+
+			<cite  style="text-align: center;">This post does  not does not have any comments yet !</cite>
+			{%endif%}
+
+	</ul>
+	
+			
+
+
+{% endmacro %}

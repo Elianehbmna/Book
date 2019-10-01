@@ -1,0 +1,17 @@
+{% import 'bootstrap/wtf.html' as wtf %}
+{% extends 'bootstrap/base.html' %}
+{% include 'navbar.html'%}
+
+
+
+
+{% block content %}
+<div class="container">
+	<div class="row">
+		<div class="jumbotron">
+				{{wtf.quick_form(form)}}
+	</div>
+</div>
+	
+	
+{% endblock %}

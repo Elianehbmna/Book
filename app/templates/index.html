@@ -1,0 +1,50 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'macros.html' as macro %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block navbar %}
+{% include 'navbar.html'%}
+{% endblock %}
+
+  {% block content %}
+    <div class="container">
+            <div class="jumbotron jumbotron-fluid">
+      <h2 style="color: #c70d3a;text-align: center" class="display-4">Welcome to our page,</h2>
+      <p style="color: #979797;text-align: center" class="lead">you have to post a one minute pitch please feel free to post in any category of your choice</p>
+      <h4 style="text-align: center" ><a  href="/books/new/" style="color: #c70d3a"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: #c70d3a"></span>   Add Your pitch </a></h4>
+      </div>
+      <br>
+      {% for book in books %}
+             <div class="row">
+              <div class="col-md-12">
+                <div class="thumbnail text-center">
+               
+                  <p>
+                      <h2>{{book.title}}</h2>
+                    <small>{{book.summary}}</small>
+                    <p>{{book.poster}}</p>
+
+                    <br><cite class="blockquote-footer"> Posted by {{book.user.username}}</cite>
+                  
+                  </p>
+                  
+                  <a href="{{url_for('main.new_comment',book_id = book.id)}}" class="glyphicon glyphicon-comment" style="margin:10px;color: #e5d429"></a> 
+                
+                  <a href="{{url_for('main.upvote',book_id = book.id)}}" class="glyphicon glyphicon-thumbs-up" style="margin:10px;color: #e5d429"><i></i><span>{{book.upvotes.count()}}</span></a>
+          
+                  
+          
+                </div>
+              
+          
+              </div>
+             </div>
+          
+             
+              
+          
+           {% endfor %}
+    </div>
+    
+
+  </body>
+  {% endblock %}
