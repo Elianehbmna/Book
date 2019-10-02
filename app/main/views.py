@@ -7,6 +7,9 @@ from flask_login import login_required, current_user
 from .forms import UpdateProfile,BookForm,CommentForm,UpvoteForm
 from .. import db,photos
 import markdown2 
+import os
+from werkzeug.utils import secure_filename
+# from app import app
 
 # Views
 @main.route('/', methods = ['GET','POST'])
@@ -36,12 +39,11 @@ def new_book():
         user_id = current_user
         category = form.category.data
         location =form.location.data
-        # poster=form.poster.data
-        
-        # filename = photos.save(request.files['photo'])
-        # path = f'photos/{filename}'
-        # poster = path
-        new_book = Book(user_id =current_user._get_current_object().id, title = title,summary=summary,category=category,location=location)
+        f = form.poster.data
+        filename = secure_filename(f.filename)
+        path = f'photos/{filename}'
+        # path = photos.url(filename)
+        new_book = Book(user_id =current_user._get_current_object().id, title = title,summary=summary,category=category,location=location,poster=path)
         db.session.add(new_book)
         db.session.commit()
         return redirect(url_for('main.index'))
@@ -121,3 +123,12 @@ def upvote(book_id):
     new_upvote.save_upvotes()
     return redirect(url_for('main.index'))
 
+@main.route('/details/<id>')
+def details(id):
+	'''
+	View Function that returns the book's page and details about the book.
+	'''
+	books = Book.query.filter_by(id = id).all()
+	title = f'Book details'
+
+	return render_template('details.html',title=title,books = books)        

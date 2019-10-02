@@ -1,0 +1,16 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'macros.html' as macro %}
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block content %}
+
+{% for book in books %}
+<p>summary:{{book.summary}}</p>
+<p>category:{{book.category}}</p>
+    {% if book.poster %}
+       <img src="{{url_for('static',filename=book.poster)}}" alt="" class="img-thumbnail" width="80px"  height="80px">
+    {% endif %}
+   <p> {{book.user.username}}</p>
+
+{% endfor %}
+
+{% endblock %}

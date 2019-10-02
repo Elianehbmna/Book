@@ -9,7 +9,10 @@
 <div class="container">
 	<div class="row">
 		<div class="jumbotron">
-				{{wtf.quick_form(form)}}
+				<form  action="{{url_for('main.new_book')}}" method="post" enctype = "multipart/form-data">
+					{{wtf.quick_form(form)}}
+				  </form>
+				
 	</div>
 </div>
 	
