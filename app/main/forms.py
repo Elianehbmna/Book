@@ -8,7 +8,6 @@ class BookForm(FlaskForm):
     title = StringField('Title', validators=[Required()])
     summary = TextAreaField("Book summary ?",validators=[Required()])
     category = RadioField('Label', choices=[ ('Educational','Educational'), ('Musical','Musical'),('Religion','Religion'),('Comedy','Comedy')],validators=[Required()])
-    location= StringField('where you can find the book', validators=[Required()])
     poster= FileField(validators=[Required()])
     submit = SubmitField('Submit')
 
@@ -20,6 +19,11 @@ class CommentForm(FlaskForm):
 	submit = SubmitField()
 class UpvoteForm(FlaskForm):
 	submit = SubmitField()
+
+class ContactForm(FlaskForm):
+   Email = StringField('Enter Your Email', validators=[Required()])
+   description = TextAreaField('Leave a message',validators=[Required()])
+   submit = SubmitField()
 
 
 

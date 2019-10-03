@@ -4,12 +4,11 @@ from ..models import  User,Book,Comment,Upvote
 from . import main
 # from ..request import get_movies,get_movie
 from flask_login import login_required, current_user
-from .forms import UpdateProfile,BookForm,CommentForm,UpvoteForm
+from .forms import UpdateProfile,BookForm,CommentForm,UpvoteForm,ContactForm
 from .. import db,photos
 import markdown2 
 import os
 from werkzeug.utils import secure_filename
-# from app import app
 
 # Views
 @main.route('/', methods = ['GET','POST'])
@@ -18,7 +17,7 @@ def index():
     '''
     View root page function that returns the index page and its data
     '''
-    books = Book.query.all()
+    books = Book.query.filter_by(id=Book.id).order_by(Book.id.desc()).all()
     title = 'Welcome Home-250-Books'
     # Educational = Book.query.filter_by(category="Educational")
     # Musical = Book.query.filter_by(category = "Musical")
@@ -38,12 +37,12 @@ def new_book():
         summary = form.summary.data
         user_id = current_user
         category = form.category.data
-        location =form.location.data
         f = form.poster.data
         filename = secure_filename(f.filename)
         path = f'photos/{filename}'
+        photos.save()
         # path = photos.url(filename)
-        new_book = Book(user_id =current_user._get_current_object().id, title = title,summary=summary,category=category,location=location,poster=path)
+        new_book = Book(user_id =current_user._get_current_object().id, title = title,summary=summary,category=category,poster=path)
         db.session.add(new_book)
         db.session.commit()
         return redirect(url_for('main.index'))
@@ -131,4 +130,12 @@ def details(id):
 	books = Book.query.filter_by(id = id).all()
 	title = f'Book details'
 
-	return render_template('details.html',title=title,books = books)        
+	return render_template('details.html',title=title,books = books)
+
+@main.route('/book/contact', methods = ['GET','POST'])
+def contactus():
+   form = ContactForm()
+   '''
+   View root page function that returns the index page and its data
+   '''
+   return render_template('contact.html',form=form)

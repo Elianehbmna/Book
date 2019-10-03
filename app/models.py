@@ -42,20 +42,23 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username}'
 
+
+
 class Book(db.Model):
     '''
     '''
     __tablename__ = 'book'
 
     id = db.Column(db.Integer, primary_key = True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)  
     title = db.Column(db.String())
     summary = db.Column(db.String(), index = True)
     category = db.Column(db.String(255), nullable=False)
-    location = db.Column(db.String())
     poster = db.Column(db.String())
+    location =db.Column(db.String())
     comments = db.relationship('Comment',backref='book',lazy='dynamic')
     upvotes = db.relationship('Upvote', backref = 'book', lazy = 'dynamic')
+    
    
 
     

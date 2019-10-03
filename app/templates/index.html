@@ -20,10 +20,11 @@
                
                   
                       <h2><a href="/details/{{book.id}}">{{book.title}}</a></h2>
-                    <small>{{book.summary}}</small>
-                    {% if book.poster %}
+                    <small>{{book.summary}}</small><br><br>
+                    {{book.poster}}
+
                     <img src="{{url_for('static',filename=book.poster)}}" alt="" class="img-thumbnail" width="80px"  height="80px">
-                    {% endif %}
+              
                     <br><cite class="blockquote-footer"> Posted by {{book.user.username}}</cite>
                      
                  
@@ -43,7 +44,7 @@
              
               
           
-           {% endfor %}
+        {% endfor %}
     </div>
     
 
