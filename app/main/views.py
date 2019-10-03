@@ -38,9 +38,10 @@ def new_book():
         user_id = current_user
         category = form.category.data
         f = form.poster.data
-        filename = secure_filename(f.filename)
+        # filename = secure_filename(f.filename)
+        filename=photos.save(form.poster.data)
         path = f'photos/{filename}'
-        photos.save()
+       
         # path = photos.url(filename)
         new_book = Book(user_id =current_user._get_current_object().id, title = title,summary=summary,category=category,poster=path)
         db.session.add(new_book)
@@ -138,4 +139,6 @@ def contactus():
    '''
    View root page function that returns the index page and its data
    '''
+   
    return render_template('contact.html',form=form)
+
