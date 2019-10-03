@@ -83,18 +83,23 @@ def profile(uname):
 def update_profile(uname):
     user = User.query.filter_by(username = uname).first()
     if user is None:
-        abort(404)
-
+       abort(404)
     form = UpdateProfile()
-
     if form.validate_on_submit():
-        user.bio = form.bio.data
-
-        db.session.add(user)
-        db.session.commit()
-
-        return redirect(url_for('.profile',uname=user.username))
-
+       user.bio = form.bio.data
+       user.fullname = form.fullname.data
+       user.mobile_phone = form.mobile_phone.data
+       user.office_phone = form.office_phone.data
+       user.email_address = form.email_address.data
+       db.session.add(user)
+       db.session.commit()
+       return redirect(url_for('.profile',uname=user.username))
+    elif request.method == 'GET':
+       form.bio.data = user.bio
+       form.fullname.data = user.fullname
+       form.mobile_phone.data = user.mobile_phone
+       form.office_phone.data = user.office_phone
+       form.email_address.data = user.email_address
     return render_template('profile/update.html',form =form)
 
 @main.route('/user/<uname>/update/pic',methods= ['POST'])
@@ -141,4 +146,10 @@ def contactus():
    '''
    
    return render_template('contact.html',form=form)
+
+@main.route('/search/<book>', methods = ['GET','POST'])
+def search(book):
+    results = Book.query.all()
+    title = f'search results for {book}'
+    return render_template('search.html', results=results)
 
