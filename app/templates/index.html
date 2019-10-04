@@ -1,52 +1,51 @@
 {% extends 'bootstrap/base.html' %}
 {% import 'macros.html' as macro %}
 {% import 'bootstrap/wtf.html' as wtf %}
+<!-- Style block -->
+{% block styles %}
+    {{ super() }}
+    <link rel="icon" type="image/png" href=" {{url_for('static', filename = 'photos/icon.png')}} ">
+{% endblock %}
 {% block navbar %}
 {% include 'navbar.html'%}
 {% endblock %}
 
   {% block content %}
-    <div class="container">
-            <div class="jumbotron jumbotron-fluid">
-      <h2 style="color: #c70d3a;text-align: center" class="display-4">Welcome to our page,</h2>
-      <p style="color: #979797;text-align: center" class="lead">you have to post a one minute pitch please feel free to post in any category of your choice</p>
-      <h4 style="text-align: center" ><a  href="/books/new/" style="color: #c70d3a"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: #c70d3a"></span>   Add Your pitch </a></h4>
+  <div style="margin:0; height:100%;background-size:cover;background-image: url('{{url_for('static',filename='photos/a1.jpg')}}')" >
+    <img width="100%" style="left:0; right:0; top:0" src="">
+      <div style="left:0;margin: 10% 10% 10% 0;width: 40%;height: 60%;padding-left:5%;padding-right: 5%" class="jumbotron">
+        <h2 style="color: #c70d3a;text-align: center" class="display-4">Welcome to 250-books,</h2>
+        <p style="color: #252525;text-align: center; padding-top: 10%;font-family: 'Shadows Into Light Two'" class="lead">We’d love to deliver you a lot of great content either for our book lovers and authors who are looking for the best platform to publish their amazing work. </p>
+        <h4 style="text-align: center; padding-top: 10%" ><a  href="/books/new/" style="color: #c70d3a"><span class="glyphicon glyphicon-plus" aria-hidden="true" style="color: #c70d3a"></span>   Add a book </a></h4>
       </div>
-      <br>
-      {% for book in books %}
-             <div class="row">
-              <div class="col-md-12">
-                <div class="thumbnail text-center">
-               
-                  
-                      <h2><a href="/details/{{book.id}}">{{book.title}}</a></h2>
-                    <small>{{book.summary}}</small><br><br>
-                    {{book.poster}}
-
-                    <img src="{{url_for('static',filename=book.poster)}}" alt="" class="img-thumbnail" width="80px"  height="80px">
-              
-                    <br><cite class="blockquote-footer"> Posted by {{book.user.username}}</cite>
-                     
-                 
-                  
-                  <a href="{{url_for('main.new_comment',book_id = book.id)}}" class="glyphicon glyphicon-comment" style="margin:10px;color: #e5d429"></a> 
-                
-                  <a href="{{url_for('main.upvote',book_id = book.id)}}" class="glyphicon glyphicon-thumbs-up" style="margin:10px;color: #e5d429"><i></i><span>{{book.upvotes.count()}}</span></a>
-          
-                  
-          
-                </div>
-              
-          
-              </div>
-             </div>
-          
-             
-              
-          
-        {% endfor %}
+  </div>
+  <div style="margin:0; height:100%;">
+    <h2 style="color: #030303;text-align: center;padding: 4% 4% 0% 4%;font-family: 'Shadows Into Light Two'">"I have no regrets about being who I am and being what I am in my country for my people. No regrets at all."</h2>
+    <p style="color: #3b3839;text-align: center"><B>Paul Kagame</B></p>
+    <div style="display:flex;flex-wrap: wrap;">
+    <div class="list-group" style="display:flex; margin: 5% 2%;flex-wrap: wrap;">
+        {% for book in books %}
+        <div class="col" style="width:20%;margin-left:0;margin: 2%;">
+          <a href="/details/{{book.id}}" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              {% if book.poster %}
+              <img height="30%" width="100%" src="{{url_for('static',filename=book.poster)}}">
+              {% else %}
+              <img height="30%" width="100%" src="{{url_for('static',filename='photos/a1.jpg')}}">
+              {% endif %}
+              <h3 class="mb-1">{{book.title}}</h3>
+            </div>
+            <p class="mb-1">{{book.summary | truncate(100)}}</p>
+            <small class="text-muted"><cite class="blockquote-footer">{{book.user.username}}</cite></small>
+          </a>
+        </div>
+      {% endfor %}
     </div>
-    
+    </div>
+  </div>
 
-  </body>
+  <div class="footer" style="padding: 1%;margin:0;left:0;bottom:0;background-color: #c70d3a;color: #fff;text-align: center">
+    <p>Copyright (c) 2019 - 250Books</p>
+  </div>
+
   {% endblock %}

@@ -1,17 +1,36 @@
 {% extends 'base.html'%}
 {% import 'bootstrap/wtf.html' as wtf%}
+<!-- Style block -->
+{% block styles %}
+    {{ super() }}
+    <link rel="icon" type="image/png" href=" {{url_for('static', filename = 'photos/icon.png')}} ">
+{% endblock %}
 
 {% block content %}
-<div class="container">
-<div class="row">
-<div class="col-md-2"> </div>
-<div class="col-md-8">
-
-{{wtf.quick_form(registration_form)}}
-
+<div class="row" style="margin:100px 0px 0px 0px">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-12" style="box-shadow: 2px 4px 12px 2px #8f8f8f;
+            margin-top: 5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            font-family: 'Mukta';">
+                <h3 style="display: flex;
+                justify-content: center;
+                font-family: 'Mukta';">Sign up</h3>
+                <h5>Fill in the form to Sign up</h5>
+                <hr>
+                {{wtf.quick_form(registration_form)}}
+                <br>
+                <p>Already have an acoount?<a href="{{url_for('auth.login')}}"> Log in here</a></p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
 </div>
-<div class="col-md-2"></div>
-</div>
-</div>
 
+<div class="footer" style="padding: 1%;margin:0;left:0;bottom:0;background-color: #c70d3a;color: #fff;text-align: center">
+        <p>Copyright (c) 2019 - 250Books</p>
+      </div>
 {% endblock%}

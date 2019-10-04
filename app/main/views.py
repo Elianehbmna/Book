@@ -130,13 +130,15 @@ def upvote(book_id):
 
 @main.route('/details/<id>')
 def details(id):
-	'''
-	View Function that returns the book's page and details about the book.
-	'''
-	books = Book.query.filter_by(id = id).all()
-	title = f'Book details'
+    '''
+    View Function that returns the book's page and details about the book.
+    '''
+    book = Book.query.filter_by(id = id).first()
+    relates = Book.query.filter_by(category = book.category).all()
+    
+    title = f'Book details'
 
-	return render_template('details.html',title=title,books = books)
+    return render_template('details.html',title=title,book = book,relates = relates)
 
 @main.route('/book/contact', methods = ['GET','POST'])
 def contactus():

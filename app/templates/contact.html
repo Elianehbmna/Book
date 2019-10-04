@@ -2,14 +2,55 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 {% extends 'bootstrap/base.html' %}
 {% import 'macros.html' as macro %}
+<!-- Style block -->
+{% block styles %}
+    {{ super() }}
+    <link rel="icon" type="image/png" href=" {{url_for('static', filename = 'photos/icon.png')}} ">
+{% endblock %}
 {% block content %}
-<h2 style="text-align: center">Contact Us</h2><br>
-<h4 style="text-align: center">Have a Question Please Ask:</h4>
-<div class="container">
-   <div class="row">
-           <div class="jumbotron">
-                   {{wtf.quick_form(form)}}
-           </div>
-   </div>
+
+<div style="margin:100px 0px 0px 0px">
+        <div class="col-md-6">
+                <br><p style="text-align: center;font-size:28px"><b>Contact Us</b></p>
+                <p style="text-align: center;font-size:15px"><b>Have a Question Please Ask:</b></p>
+        </div>
+        <div style="margin-bottom: 5%;padding: 0 12% 0 0%" class="col-md-6">
+                <blockquote class=" text-right">
+                <p style="padding-left: 10%;font-size:15px;color:rgb(93, 88, 88)" class="mb-0">
+                                Wouldn’t you like to get away? Sometimes you want to go where everybody knows your name. And they’re always glad you came. Makin their way the only way they know how.
+                </p>
+                </blockquote>
+        </div>
 </div>
+<div style="">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1993.7720548137843!2d30.077739199070965!3d-1.9346261429441944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca6bad0e6e8f1%3A0xaefc53eb751c9253!2sKigali%20Public%20Library!5e0!3m2!1sen!2srw!4v1570160141202!5m2!1sen!2srw" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+</div>
+
+<div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-6">
+        <div class="row" style="margin-bottom: 5%">
+            <div class="col-md-12" style="box-shadow: 2px 4px 12px 2px #8f8f8f;
+            margin-top: 5rem;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            font-family: 'Mukta';">
+                <h3 style="display: flex;
+                justify-content: center;
+                font-family: 'Mukta';">Contact Us</h3>
+                <h5>Have a Question Please Ask:</h5>
+                <hr>
+                {{wtf.quick_form(form)}}
+                <br>
+                <p>Enjoy our service!</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<div class="footer" style="padding: 1%;margin:0;left:0;bottom:0;background-color: #c70d3a;color: #fff;text-align: center">
+        <p>Copyright (c) 2019 - 250Books</p>
+      </div>
+
 {% endblock %}

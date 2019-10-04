@@ -1,5 +1,15 @@
 {% extends 'base.html'%}
+<!-- Style block -->
+{% block styles %}
+    {{ super() }}
+    <link rel="icon" type="image/png" href=" {{url_for('static', filename = 'photos/icon.png')}} ">
+{% endblock %}
 
 {% block content %}
-    <h1>WHOOOPS we can't find that page</h1>
+    <h1 style="margin:100px 0px 0px 0px">WHOOOPS we can't find that page</h1>
+
+
+  <div class="footer" style="padding: 1%;margin:0;left:0;bottom:0;background-color: #c70d3a;color: #fff;text-align: center">
+        <p>Copyright (c) 2019 - 250Books</p>
+      </div>
 {% endblock %}
